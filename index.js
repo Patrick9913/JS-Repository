@@ -53,11 +53,18 @@ do {
 
                     case 2:
 
-                        let nombre, edad, dni, nombres, alumnoEncontrado;
+                        let nombre, edad, dni, nombres, alumnoEncontrado, seguirCargando = true;
                 
                         do {
             
-                            nombre = prompt("Ingrese el nombre y apellido del alumno").trim().toUpperCase();
+                            nombre = prompt("Ingrese el nombre y apellido del alumno");
+
+                            if (nombre === null) {
+                                seguirCargando = false;
+                                break;
+                            }
+
+                            nombre = nombre.trim().toUpperCase()
 
                             nombres = nombre.split(" ");
 
@@ -71,27 +78,41 @@ do {
 
                                         if (alumnoEncontrado) alert ("El alumno ingresado, ya existe.");
 
-                                    } else if (nombres.length = 1) alert ("El nombre no cuenta con un apellido")
+                                    } else if (nombres.length === 1) alert ("El nombre no cuenta con un apellido")
         
                                         else alert ("El dato ingresado no existe.");
 
                                 }
             
-                        } while (nombres.some((nom) => !isNaN(nom)) || nombres.length < 2 || alumnoEncontrado);
+                        } while ((nombres.some((nom) => !isNaN(nom)) || nombres.length < 2 || alumnoEncontrado) && seguirCargando);
 
-                        do {
+                        edad = -1;
+
+                        while ((isNaN(edad) || edad <= 0 || edad >= 35) && seguirCargando) {
 
                             edad = prompt(`Ingrese la edad del alumno ${nombre}`);
+
+                            if (edad === null) {
+                                seguirCargando = false;
+                                break;
+                            }
                             
                             if (isNaN(edad)) alert ("El dato ingresado no corresponde con un valor numerico, intente otra vez.");
                             else if (edad <= 0) alert ("No ha ingresado ningun valor, intente otra vez");
                             else if (edad >= 35) alert ("Usted es muy adulto como para ingresar a la base de datos.")
             
-                        }   while (isNaN(edad) || edad <= 0 || edad >= 35);
-            
-                        do {
+                        }
+
+                        dni = "7";
+
+                        while ((isNaN(dni) || dni.length < 8 || dni.length > 9) && seguirCargando) {
             
                             dni = prompt (`Ingrese el numero de DNI del alumno ${nombre}`);
+
+                            if (dni === null) {
+                                seguirCargando = false;
+                                break;
+                            }
             
                             if (isNaN(dni)) alert ("El dato ingresado no corresponde con un valor numerico, intente otra vez.")
                             
@@ -99,12 +120,15 @@ do {
 
                                 else if (dni.length > 9) alert ("El numero ingresado supera las cifras de un DNI");
             
-                        } while (isNaN(dni) || dni.length < 8 || dni.length > 9);
-                        
+                        }
+
+                        if (seguirCargando) {
+
+                            const alumno = new Alumno (nombre.toUpperCase(),edad,dni);
             
-                        const alumno = new Alumno (nombre.toUpperCase(),edad,dni);
-            
-                        alumnos.push(alumno);
+                            alumnos.push(alumno);
+                            
+                        }
             
                         break;
                     
@@ -112,13 +136,23 @@ do {
 
                         do {
 
-                            let alumnoBusqueda = prompt("Ingrese el nombre y apellido del alumno que desea modificar").toUpperCase();
+                            let alumnoBusqueda = prompt("Ingrese el nombre y apellido del alumno que desea modificar");
+                            
+                            if (alumnoBusqueda === null) break;
 
-                            let alumnoEncontrado = alumnos.find (alumno => alumno.nombre.toUpperCase() === alumnoBusqueda.toUpperCase());
+                            alumnoBusqueda = alumnoBusqueda.trim().toUpperCase();
+
+                            let alumnoEncontrado = alumnos.find (alumno => alumno.nombre === alumnoBusqueda);
 
                             if (alumnoEncontrado) {
+
+                                let nuevoNombre = prompt ("Ingrese el nuevo nombre");
+
+                                if (nuevoNombre === null) break;
+
+                                nuevoNombre = nuevoNombre.trim().toUpperCase();
                             
-                                alumnoEncontrado.nombre = prompt("Ingrese el nuevo nombre").toUpperCase();
+                                alumnoEncontrado.nombre = nuevoNombre;
 
                                 alert (`El nombre del alumno ${alumnoBusqueda} ha sido actualizado`);
     
