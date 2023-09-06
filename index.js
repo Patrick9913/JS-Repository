@@ -16,18 +16,6 @@ class Alumno extends Persona {
     }
 }
 
-class Profesor extends Persona {
-    constructor (nombre, edad, profesion) {
-        super(nombre,edad),
-        this.profesion = profesion
-    }
-    mostrarProfesor() {
-        alert (`Nombre: ${this.nombre}  Edad: ${this.edad}  Profesión: ${this.profesion}`);
-    }
-}
-
-let opcionIngresada = 0;
-
 const alumnos = [
 
     new Alumno ("JUAN PÉREZ", 18, 20345678),
@@ -38,7 +26,7 @@ const alumnos = [
 
 ];
 
-const profesores = [];
+let opcionIngresada = 0;
 
 do {
     
