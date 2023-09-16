@@ -31,7 +31,7 @@ body {
 
 // clases 
 
-button {
+.button {
     border: none;
     background: none;
 }
@@ -41,16 +41,16 @@ button {
     height: 32px;
 }
 
-@keyframes animacionSalida {
-    0% {
-        width: 100%;
-    }
-    100% {
-        width: 0;
-        display: none;
-    }
+#alineador {
+    display: grid;
+    place-items: center;
+    height: 100vh;
 }
 
-.salirElementos {
-    animation: animacionSalida 1s forwards;
+#alumnosLista {
+    background-color: wheat;
+    width: 100%;
+    max-width: 740px;
+    height: 100vh;
+    max-width: 440px;
 }

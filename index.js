@@ -202,24 +202,64 @@
 
 const menus = {
     principal: document.getElementById ("menuPrincipal"),
+    salir: document.getElementById ("menuSalir"),
     alumnos: document.getElementById ("menuAlumnos"),
+    datosAlumnos: document.getElementById ("datosAlumnos"),
     profesores: document.getElementById ("menuProfesores")
 }
 
 const buttons = {
     salir: document.getElementById ("salir"),
+    confirmarSalir: document.getElementById ("confirmarSalir"),
+    irPrincipal: document.getElementById ("irPrincipal"),
     irAlumnos: document.getElementById ("irAlumnos"),
+    irDatosAlumnos: document.getElementById ("irDatosAlumnos"),
     irProfesores: document.getElementById ("irProfesores"),
     volverDeAlumnos: document.getElementById ("volverDeAlumnos"),
+    volverDeDatosAlumnos: document.getElementById ("volverDeDatos"),
     volverDeProfesores: document.getElementById ("volverDeProfesores")
 }
 
+buttons.salir.onclick = () => {
+    menus.salir.classList.replace ("d-none", "d-block");
+    menus.principal.classList.replace ("d-block", "d-none");
+}
+
+buttons.confirmarSalir.onclick = () => {
+    window.close();
+}
+
+buttons.irPrincipal.onclick = () => {
+    menus.salir.classList.replace ("d-block", "d-none");
+    menus.principal.classList.replace ("d-none", "d-block");
+}
+
 buttons.irAlumnos.onclick = () => {
-    menus.principal.classList.replace ("d-block", "salirElementos");
+    menus.principal.classList.replace ("d-block", "d-none");
+    menus.alumnos.classList.replace ("d-none", "d-block");
+}
+
+buttons.irDatosAlumnos.onclick = () => {
+    menus.alumnos.classList.replace ("d-block", "d-none");
+    menus.datosAlumnos.classList.replace("d-none", "d-block");
+}
+
+buttons.volverDeDatosAlumnos.onclick = () => {
+    menus.datosAlumnos.classList.replace ("d-block", "d-none");
     menus.alumnos.classList.replace ("d-none", "d-block");
 }
 
 buttons.volverDeAlumnos.onclick = () => {
     menus.alumnos.classList.replace ("d-block", "d-none");
+    menus.principal.classList.replace ("d-none", "d-block");
+}
+
+buttons.irProfesores.onclick = () => {
+    menus.principal.classList.replace ("d-block", "d-none");
+    menus.profesores.classList.replace ("d-none", "d-block");
+}
+
+buttons.volverDeProfesores.onclick = () => {
+    menus.profesores.classList.replace ("d-block", "d-none");
     menus.principal.classList.replace ("d-none", "d-block");
 }

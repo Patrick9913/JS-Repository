@@ -37,6 +37,33 @@
                 </button>
             </div>
         </section>
+        <section id="datosAlumnos" class="d-none">
+            <div class="d-flex justify-content-end align-items-center" style="margin-right: 600px;">
+                <img src="./images/usuarios.png" alt="">
+                <h2 class="m-5">Alumnos</h2>
+            </div>
+            <p class="text-center me-5 ms-5 mb-5">A continuación, la lista de estudiantes con nombres, grados y detalles adicionales para conocer su progreso y participación en la escuela.</p>
+            <div class="m-5">
+                <ul class="d-flex align-items-center justify-content-start gap-5">
+                    <li><img src="./images/lapiz-de-usuario-32.png" alt=""></li>
+                    <li>Patrick Ordoñez</li>
+                    <li>24</li>
+                </ul>
+            </div>
+            <div class="d-flex justify-content-end align-items-center m-5 button">
+                <button id="volverDeDatos"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left svg-sizer" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                </button>
+            </div>
+        </section>
+        <div id="menuSalir" class="d-none">
+            <h4 class="m-5">Usted está a punto de salir de la aplicación</h4>
+            <div class="d-flex justify-content-between m-5">
+                <button id="confirmarSalir">Salir</button>
+                <button id="irPrincipal">Cancelar</button>
+            </div>
+        </div>
         <section id="menuAlumnos" class="d-none">
             <div class="d-flex justify-content-center align-items-center mt-5">
                 <img style="margin-right: 15px;" src="./images/gorro-de-graduacion.png" alt="">
@@ -45,7 +72,7 @@
             <p class="text-center m-5">En la sección de Alumnos, encontrarás información detallada sobre los estudiantes matriculados en nuestra escuela. Desde datos personales y registros académicos hasta asistencia y actividades extracurriculares, aquí tendrás acceso a todo lo relacionado con el progreso y desarrollo de nuestros estudiantes.</p>
             <h4 class="text-center">Escoje una de las siguientes opciones</h4>
             <div class="d-flex justify-content-center align-items-center gap-5 m-5">
-                <a href="#" class="d-flex justify-content-center align-items-center flex-column" style="text-decoration: none; color: black;">
+                <a id="irDatosAlumnos" href="#" class="d-flex justify-content-center align-items-center flex-column" style="text-decoration: none; color: black;">
                     <img class="mb-3" src="./images/equipo-de-usuario.png" alt="logoEstudiante">
                     Ver y/o modificar Alumno
                 </a>
