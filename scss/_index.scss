@@ -47,10 +47,8 @@ body {
     height: 100vh;
 }
 
-#alumnosLista {
-    background-color: wheat;
-    width: 100%;
-    max-width: 740px;
-    height: 100vh;
-    max-width: 440px;
+.dis-grid {
+    display: grid;
+    grid-template-columns: 10% 40% 10% 20% 20%;
 }
+
