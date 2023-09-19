@@ -1,204 +1,31 @@
 
-// class Persona {
-//     constructor (nombre, edad) {
-//         this.nombre = nombre,
-//         this.edad = edad
-//     }
-// }
+class Persona {
+    constructor (nombre, apellido, edad) {
+        this.nombre = nombre,
+        this.apellido = apellido,
+        this.edad = edad
+    }
+}
 
-// class Alumno extends Persona {
-//     constructor (nombre, edad, dni) {
-//         super(nombre, edad),
-//         this.dni = dni
-//     }
-//     monstrarAlumno() {
-//         alert (`Nombre: ${this.nombre} Edad: ${this.edad} DNI: ${this.dni}`);
-//     }
-// }
+class Alumno extends Persona {
+    constructor (nombre, apellido, edad, dni) {
+        super(nombre, apellido, edad),
+        this.dni = dni
+    }
+    monstrarAlumno() {
+        alert (`Nombre: ${this.nombre} Edad: ${this.edad} DNI: ${this.dni}`);
+    }
+}
 
-// const alumnos = [
+const alumnos = [
 
-//     new Alumno ("JUAN PÉREZ", 18, 20345678),
-//     new Alumno ("MARÍA GARCÍA", 20, 30456789),
-//     new Alumno ("CARLOS LÓPEZ", 19, 40567890),
-//     new Alumno ("ANA MARTÍNEZ", 21, 50678901),
-//     new Alumno ("LUIS RODRIGUEZ", 22, 60789012)
+    new Alumno ("Juan", "Pérez", 18, 20345678),
+    new Alumno ("María", "García", 20, 30456789),
+    new Alumno ("Carlos", "López", 19, 40567890),
+    new Alumno ("Ana", "Martínez", 21, 50678901),
+    new Alumno ("Luis", "Rodriguez", 21, 60789012)
 
-// ];
-
-// const validado = (nom) => nom.some (nom => !isNaN(nom));
-
-// let opcionIngresada = 0;
-
-// do {
-    
-//     opcionIngresada = parseInt (prompt(" 1 - Alumnos \n 2 - Profesores \n 3 - Salir"));
-
-//     switch (opcionIngresada) {
-
-//         case 1:
-            
-//             let = opcionAlumnos = 0;
-
-//             do {
-                
-//                 opcionAlumnos = parseInt( prompt (" 1 - Ver Alumnos \n 2 - Agregar Alumnos \n 3 - Modificar Alumno \n 4 - Volver"));
-
-//                 switch (opcionAlumnos) {
-
-//                     case 1:
-
-//                         if ( alumnos.length == 0) alert("No hay datos disponibles.");
-//                             else alumnos.forEach((alumno) => alumno.monstrarAlumno());
-
-//                         break;
-
-//                     case 2:
-
-//                         let nombre, edad, dni, nombres, alumnoEncontrado, seguirCargando = true;
-                
-//                         do {
-            
-//                             nombre = prompt("Ingrese el nombre y apellido del alumno");
-
-//                             if (nombre === null) {
-//                                 seguirCargando = false;
-//                                 break;
-//                             }
-
-//                             nombre = nombre.trim().toUpperCase()
-
-//                             nombres = nombre.split(" ");
-
-//                             if (validado(nombres)) alert ("El dato ingresado corresponde a un valor numerico, intente otra vez.");
-
-//                                 else {
-
-//                                     if (nombres.length > 1) {
-
-//                                         alumnoEncontrado = alumnos.find ((alumno) => alumno.nombre.toUpperCase() === nombre.toUpperCase())
-
-//                                         if (alumnoEncontrado) alert ("El alumno ingresado, ya existe.");
-
-//                                     } else if (nombres.length === 1) alert ("El nombre no cuenta con un apellido")
-        
-//                                         else alert ("El dato ingresado no existe.");
-
-//                                 }
-            
-//                         } while ((validado(nombres) || nombres.length < 2 || alumnoEncontrado) && seguirCargando);
-
-//                         edad = -1;
-
-//                         while ((isNaN(edad) || edad <= 0 || edad >= 35) && seguirCargando) {
-
-//                             edad = prompt(`Ingrese la edad del alumno ${nombre}`);
-
-//                             if (edad === null) {
-//                                 seguirCargando = false;
-//                                 break;
-//                             }
-                            
-//                             if (isNaN(edad)) alert ("El dato ingresado no corresponde con un valor numerico, intente otra vez.");
-
-//                             else if (edad <= 0) alert ("No ha ingresado ningun valor, intente otra vez");
-                            
-//                             else if (edad >= 35) alert ("Usted es muy adulto como para ingresar a la base de datos.")
-            
-//                         }
-
-//                         dni = "7";
-
-//                         while ((isNaN(dni) || dni.length < 8 || dni.length > 9) && seguirCargando) {
-            
-//                             dni = prompt (`Ingrese el numero de DNI del alumno ${nombre}`);
-
-//                             if (dni === null) {
-//                                 seguirCargando = false;
-//                                 break;
-//                             }
-            
-//                             if (isNaN(dni)) alert ("El dato ingresado no corresponde con un valor numerico, intente otra vez.")
-                            
-//                             if (dni.length < 8) alert ("el numero ingresado no corresponde con un DNI valido");
-
-//                                 else if (dni.length > 9) alert ("El numero ingresado supera las cifras de un DNI");
-            
-//                         }
-
-//                         if (seguirCargando) {
-
-//                             const alumno = new Alumno (nombre.toUpperCase(),edad,dni);
-            
-//                             alumnos.push(alumno);
-                            
-//                         }
-            
-//                         break;
-                    
-//                     case 3:
-
-//                         do {
-
-//                             let alumnoBusqueda = prompt("Ingrese el nombre y apellido del alumno que desea modificar");
-                            
-//                             if (alumnoBusqueda === null) break;
-
-//                             alumnoBusqueda = alumnoBusqueda.trim().toUpperCase();
-
-//                             let alumnoEncontrado = alumnos.find (alumno => alumno.nombre === alumnoBusqueda);
-
-//                             if (alumnoEncontrado) {
-
-//                                 let nuevoNombre = prompt ("Ingrese el nuevo nombre");
-
-//                                 if (nuevoNombre === null) break;
-
-//                                 nuevoNombre = nuevoNombre.trim().toUpperCase();
-                            
-//                                 alumnoEncontrado.nombre = nuevoNombre;
-
-//                                 alert (`El nombre del alumno ${alumnoBusqueda} ha sido actualizado`);
-    
-//                             } else alert ("El alumno que usted busca no se encuentra en la base de datos.");
-
-//                         } while (confirm ("¿Deseas buscar otro alumno?"));
-
-//                         break;
-                        
-
-//                     case 4:
-//                         break;
-                    
-//                     default: 
-
-//                         alert("Opcion incorrecta");
-
-//                 }
-
-//             } while (opcionAlumnos != 4);
-//             break;
-
-            
-
-//         case 2:
-
-//             alert ("Seccion en desarrollo, proximamente.");
-//             break;
-
-//         case 3:
-
-//             alert("La sesión se ha cerrado con exito.");
-//             break;
-
-//         default: 
-
-//             alert("Opción incorrecta");
-
-//     }
-
-// } while (opcionIngresada != 3);
-
+];
 
 const menus = {
     principal: document.getElementById ("menuPrincipal"),
@@ -229,6 +56,13 @@ const buttons = {
     volverDeIngresoProfesor: document.getElementById ("volverDeIngresoProfesor")
 }
 
+const inputsAlumnos = {
+    nombre: document.getElementById ("inputName"),
+    apellido: document.getElementById ("inputLastName"),
+    edad: document.getElementById ("inputAge"),
+    dni: document.getElementById ("inputdni")
+}
+
 buttons.salir.onclick = () => {
     menus.salir.classList.replace ("d-none", "d-block");
     menus.principal.classList.replace ("d-block", "d-none");
@@ -251,6 +85,32 @@ buttons.irAlumnos.onclick = () => {
 buttons.irDatosAlumnos.onclick = () => {
     menus.alumnos.classList.replace ("d-block", "d-none");
     menus.datosAlumnos.classList.replace("d-none", "d-block");
+
+    let listaAlumnos = document.getElementById ("listaAlumnos")
+
+    listaAlumnos.innerHTML = "";
+
+    for (const alumno of alumnos) {
+        listaAlumnos.innerHTML += `
+        <div class="d-flex justify-content-between align-items-center m-5">
+            <img src="./images/lapiz-de-usuario-32.png" alt="">
+            <p class="m-0">${alumno.nombre} ${alumno.apellido}</p>
+            <p class="m-0">${alumno.edad}</p>
+            <p class="m-0">${alumno.dni}</p>
+            <div>
+                <button class="me-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                    </svg>
+                </button>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>`;
+    }
 }
 
 buttons.volverDeDatosAlumnos.onclick = () => {
@@ -301,4 +161,35 @@ buttons.volverDeDatosProfesores.onclick = () => {
 buttons.volverDeProfesores.onclick = () => {
     menus.profesores.classList.replace ("d-block", "d-none");
     menus.principal.classList.replace ("d-none", "d-block");
+}
+
+const validarAlumno = document.getElementById ("validarAlumno");
+
+const esValidoNombres = (valorInputNombre, valorInputApellido) => {
+    return /^[a-zA-ZñÑ]+$/.test(valorInputNombre) && /^[a-zA-ZñÑ]+$/.test(valorInputApellido);
+}
+
+const edadEsvalido = (valorInputEdad, edadmin, edadmax) => {
+    return !isNaN(valorInputEdad) && valorInputEdad >= edadmin && valorInputEdad <= edadmax;
+}
+
+const dniEsValido = (valorInputDni) => {
+    return !isNaN(valorInputDni) && /^[0-9a-zA-Z]{8}$/.test(valorInputDni);
+}
+
+validarAlumno.onclick = () => {
+
+    let valorInputNombre = inputsAlumnos.nombre.value.trim();
+    let valorInputApellido = inputsAlumnos.apellido.value.trim();
+    let valorInputEdad = parseInt(inputsAlumnos.edad.value);
+    let valorInputDni = parseInt(inputsAlumnos.dni.value);
+
+    if (esValidoNombres(valorInputNombre, valorInputApellido) && edadEsvalido(valorInputEdad, 5, 21) && dniEsValido(valorInputDni)){
+        alumnos.push(new Alumno (valorInputNombre, valorInputApellido, valorInputEdad, valorInputDni))
+        alert ("alumno cargado exitosamente");
+        inputsAlumnos.nombre.value = "";
+        inputsAlumnos.apellido.value = "";
+        inputsAlumnos.edad.value = "";
+        inputsAlumnos.dni.value = "";
+    }   else alert ("ingreso invalido");
 }
