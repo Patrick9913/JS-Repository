@@ -171,7 +171,7 @@
                 <h2 class="m-5">Datos de Profesores</h2>
             </div>
             <p class="text-center me-5 ms-5 mb-5">A continuación, la lista de profesores con nombres, asignaturas y detalles adicionales para conocer su progreso y participación en la escuela.</p>
-            <div class="m-5" style="height: 270px; overflow: scroll;">
+            <div id="listaProfesores" class="m-5" style="height: 270px; overflow: scroll;">
                 <div class="d-flex justify-content-between align-items-center m-5">
                     <img src="./images/lapiz-de-usuario-32.png" alt="">
                     <p class="m-0">Carlos Gonzalez</p>
@@ -266,28 +266,28 @@
                 <div class="d-flex flex-column gap-2">
                     <div class="d-flex flex-column">
                         <label for="inputName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="inputName">
+                        <input type="text" class="form-control" id="inputNameTeacher">
                     </div>
                     <div class="d-flex flex-column">
-                        <label for="inputLastName" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="inputLastName">
+                        <label for="inputLastNameTeacher" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="inputLastNameTeacher">
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-2">
                     <div>
-                        <label for="inputAge" class="form-label">Edad</label>
-                        <input type="number" style="appearance: textfield;" class="form-control" id="inputAge">
+                        <label for="inputAgeTeacher" class="form-label">Edad</label>
+                        <input type="number" style="appearance: textfield;" class="form-control" id="inputAgeTeacher">
                     </div>
                     <div>
-                        <label for="inputdni" class="form-label">DNI</label>
-                        <input type="number" style="appearance: textfield;" class="form-control" id="inputdni">
+                        <label for="inputdniTeacher" class="form-label">DNI</label>
+                        <input type="number" style="appearance: textfield;" class="form-control" id="inputdniTeacher">
                     </div>
                     <div class="d-flex flex-column">
                         <label for="inputassigment" class="form-label">Materia</label>
                         <input type="text" id="inputassigment" class="form-control">
                     </div>
                     <div class="d-flex justify-content-end align-items-center button">
-                        <button class="btn btn-primary">Agregar</button>
+                        <button id="validarProfesor" class="btn btn-primary">Agregar</button>
                     </div>
                 </div>
             </div>
