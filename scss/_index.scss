@@ -13,7 +13,6 @@ body {
     background-repeat: no-repeat;
     display: grid;
     place-items: center;
-    height: 100vh;
     color: black;
     main {
         display: grid;
@@ -28,10 +27,7 @@ body {
     }
 }
 
-
-// clases 
-
-.button {
+button {
     border: none;
     background: none;
 }

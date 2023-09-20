@@ -15,7 +15,6 @@ body {
   background-repeat: no-repeat;
   display: grid;
   place-items: center;
-  height: 100vh;
   color: black;
 }
 body main {
@@ -38,6 +37,17 @@ button {
 .svg-sizer {
   width: 32px;
   height: 32px;
+}
+
+#alineador {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.dis-grid {
+  display: grid;
+  grid-template-columns: 10% 40% 10% 20% 20%;
 }
 
 /*# sourceMappingURL=style.css.map */

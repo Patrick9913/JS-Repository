@@ -185,11 +185,26 @@ validarAlumno.onclick = () => {
     let valorInputDni = parseInt(inputsAlumnos.dni.value);
 
     if (esValidoNombres(valorInputNombre, valorInputApellido) && edadEsvalido(valorInputEdad, 5, 21) && dniEsValido(valorInputDni)){
+
         alumnos.push(new Alumno (valorInputNombre, valorInputApellido, valorInputEdad, valorInputDni))
-        alert ("alumno cargado exitosamente");
         inputsAlumnos.nombre.value = "";
         inputsAlumnos.apellido.value = "";
         inputsAlumnos.edad.value = "";
         inputsAlumnos.dni.value = "";
-    }   else alert ("ingreso invalido");
+
+        
+        Swal.fire(
+            'Ingreso exitoso',
+            'el alumno ha sido añadido a la lista',
+            'success'
+            );
+
+    }   else {
+
+        Swal.fire(
+            'Ingreso invalido',
+            'los datos proporcionados son incorrectos',
+            'warning'
+            );
+    }
 }
