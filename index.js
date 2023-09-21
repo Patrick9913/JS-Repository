@@ -63,7 +63,7 @@ const menus = {
     alumnos: document.getElementById ("menuAlumnos"),
     datosAlumnos: document.getElementById ("datosAlumnos"),
     agregarAlumno: document.getElementById ("agregarAlumno"),
-    actualizarAlumnoAlumno: document.getElementById ("actualizarAlumno"),
+    modificarAlumno: document.getElementById ("modificarAlumno"),
     profesores: document.getElementById ("menuProfesores"),
     datosProfesores: document.getElementById ("datosProfesores"),
     agregarProfesor: document.getElementById ("agregarProfesor")
@@ -158,6 +158,22 @@ buttons.irDatosAlumnos.onclick = () => {
             </div>
         </div>`;
     }
+
+    const editarAlumno = document.querySelectorAll(".irEditarAlumno");
+    const borrarAlumno = document.querySelectorAll(".irBorrarAlumno");
+
+    editarAlumno.forEach ((editarAlumno, index) => {
+        editarAlumno.onclick = () => {
+            menus.datosAlumnos.classList.replace ("d-block", "d-none");
+            menus.modificarAlumno.classList.replace ("d-none", "d-block");
+
+            let valorInputNombreMod = alumnos.nombre;
+            let valorInputApellidoMod = alumnos.apellido;
+            let valorInputEdadMod = alumnos.edad;
+            let valorInputDniMod = alumnos.dni;
+
+        }
+    });
 }
 
 buttons.volverDeEditarAlumno.onclick = () => {
