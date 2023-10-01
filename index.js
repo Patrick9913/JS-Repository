@@ -38,15 +38,7 @@ class Profesor extends Persona {
     }
 }
 
-const alumnos = [
-
-    new Alumno ("Juan", "Pérez", 18, 20345678),
-    new Alumno ("María", "García", 20, 30456789),
-    new Alumno ("Carlos", "López", 19, 40567890),
-    new Alumno ("Ana", "Martínez", 21, 50678901),
-    new Alumno ("Luis", "Rodriguez", 21, 60789012)
-
-];
+const alumnos = JSON.parse(localStorage.getItem("AlumnoStorage")) || [];
 
 const profesores = [
 
@@ -279,8 +271,10 @@ validarAlumno.onclick = () => {
 
     } else if (esValidoNombres(valorInputNombre, valorInputApellido) && edadEsvalido(valorInputEdad, 5, 21) && dniEsValido(valorInputDni)){
 
-        alumnos.push(new Alumno (valorInputNombre, valorInputApellido, valorInputEdad, valorInputDni))
+        alumnos.push(new Alumno (valorInputNombre, valorInputApellido, valorInputEdad, valorInputDni));
 
+        localStorage.setItem ("AlumnoStorage", JSON.stringify(alumnos));
+        
         inputsAlumnos.nombre.value = "";
         inputsAlumnos.apellido.value = "";
         inputsAlumnos.edad.value = "";

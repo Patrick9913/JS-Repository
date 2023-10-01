@@ -1,0 +1,6 @@
+node_modules/
+fuentes/
+*.log
+*.map
+*.psd
+*.vscode
