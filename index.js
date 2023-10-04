@@ -192,6 +192,37 @@ const construirListaAlumnos = () => {
                     'success'
                 );
             }
+            Swal.fire({
+                title: '¿Estas seguro de eliminar este alumno?',
+                text: "no serás capaz de revertir los hechos.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                
+                if (result.isConfirmed && indexBotonBorrar >=0 && indexBotonBorrar < alumnos.length) {
+
+                    alumnos.splice (indexBotonBorrar, 1);
+
+                    localStorage.setItem("AlumnoStorage", JSON.stringify(alumnos));
+
+                    construirListaAlumnos();
+
+                    Swal.fire(
+                        'Eliminación exitosa',
+                        'El alumno ha sido eliminado de la lista',
+                        'success'
+                    );
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+              })
         }
     })
 }
