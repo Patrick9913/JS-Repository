@@ -105,6 +105,11 @@ const inputsProfesores = {
     materia: document.getElementById ("inputassigment")
 }
 
+const titulos = {
+    actualizarAlumno: document.getElementById ("tituloAlumno"),
+    actualizarProfesor: document.getElementById ("tituloProfesor")
+}
+
 // Funcion de navegacion 
 
 const construirListaAlumnos = () => {
@@ -154,6 +159,8 @@ const construirListaAlumnos = () => {
     editarAlumnoBtns.forEach ((button) => {
         button.onclick = function(){
 
+            titulos.actualizarAlumno.innerText = "Actualizar Alumno";
+
             const botonActual = this;
             
             const index = botonActual.dataset.index;
@@ -197,7 +204,7 @@ const construirListaAlumnos = () => {
                 
                 if (result.isConfirmed) {
 
-                    if (indexBotonBorrar >=0 && indexBotonBorrar < alumnos.length){
+                    if (indexBotonBorrar >= 0 && indexBotonBorrar < alumnos.length){
                         alumnos.splice (indexBotonBorrar, 1);
 
                         localStorage.setItem("AlumnoStorage", JSON.stringify(alumnos));
@@ -260,10 +267,12 @@ const construirListaProfesores = () => {
     }
 
     const editarProfesorBtns = document.querySelectorAll (".irEditarProfesor");
-    const irBorrarProfesorBtns = document.querySelectorAll (".irBorrarProfesor");
+    const BorrarProfesorBtns = document.querySelectorAll (".irBorrarProfesor");
 
     editarProfesorBtns.forEach ((button) => {
         button.onclick = function(){
+
+            titulos.actualizarProfesor.innerText = "Actualizar Profesor";
 
             const botonActual = this;
 
@@ -287,6 +296,44 @@ const construirListaProfesores = () => {
             inputsProfesores.dni.value = profesorActual.dni;
             inputsProfesores.materia.value = profesorActual.materia;
 
+        }
+    })
+
+    BorrarProfesorBtns.forEach ((button) => {
+        button.onclick = function(){
+
+            const botonActual = this;
+
+            const indexBotonBorrar = parseInt(botonActual.dataset.index, 10);
+
+            Swal.fire({
+                title: '¿Estas seguro de eliminar este profesor?',
+                text: "no serás capaz de revertir los hechos.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+              }).then((result) => {
+                
+                if (result.isConfirmed) {
+
+                    if (indexBotonBorrar >= 0 && indexBotonBorrar < profesores.length){
+                        profesores.splice (indexBotonBorrar, 1);
+
+                        localStorage.setItem ("ProfesorStorage", JSON.stringify(profesores));
+
+                        construirListaProfesores();
+
+                        Swal.fire(
+                            'Eliminación exitosa',
+                            'El profesor ha sido eliminado de la lista',
+                            'success'
+                        );
+                    }
+                }
+            })
         }
     })
 }
@@ -319,6 +366,8 @@ buttons.volverDeDatosAlumnos.onclick = () => navegar ("datosAlumnos", "alumnos")
 
 
 buttons.irIngresarAlumno.onclick = () => {
+
+    titulos.actualizarAlumno.innerText = "Agregar Alumno";
 
     inputsAlumnos.nombre.value = "";
     inputsAlumnos.apellido.value = "";
@@ -358,6 +407,8 @@ buttons.irDatosProfesores.onclick = () => {
 }
 
 buttons.irIngresarProfesor.onclick = () => {
+
+    titulos.actualizarProfesor.innerText = "Agregar Profesor";
 
     inputsProfesores.nombre.value = "";
     inputsProfesores.apellido.value = "";
@@ -549,8 +600,8 @@ buttons.actualizarProfesor.onclick = () => {
 
     if (profesorExiste) {
         Swal.fire(
-            'Ingreso invalido',
-            'el profesor que usted desea agregar, ya existe',
+            'Actualizacion fallida',
+            'el DNI modificado coincide con el de un profesor existente',
             'warning'
         );
     } else if (esValidoNombres(valorInputNombreTeacher, valorInputApellidoTeacher) && edadEsvalido(valorInputEdadTeacher, 22, 64) && dniEsValido(valorInputDniTeacher) && materiaEsValido(valorInputMateria)) {
@@ -570,15 +621,15 @@ buttons.actualizarProfesor.onclick = () => {
         inputsProfesores.materia.value = "";
 
         Swal.fire(
-            'Ingreso exitoso',
-            'el profesor ha sido añadido a la lista',
+            'Actualizacion exitosa',
+            'el profesor ha sido actualizado',
             'success'
         );
 
     } else {
 
         Swal.fire(
-            'Ingreso invalido',
+            'Actualizacion fallida',
             'los datos proporcionados son incorrectos',
             'error'
         );
