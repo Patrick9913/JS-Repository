@@ -106,14 +106,18 @@ const construirListaAlumnos = () => {
 
     let listaAlumnos = document.getElementById ("listaAlumnos")
 
+    listaAlumnos.innerHTML = "";
+
     if (alumnos.length === 0) {
+
+
         Swal.fire(
             '¡Ups!',
             'no se han encontrado datos',
             'question'
             );
+            
     } else {
-        listaAlumnos.innerHTML = "";
 
         for (let i = 0; i < alumnos.length; i++){
             listaAlumnos.innerHTML += `
@@ -173,25 +177,7 @@ const construirListaAlumnos = () => {
             const botonActual = this;
 
             const indexBotonBorrar = parseInt(botonActual.dataset.index, 10);
-            
-            alumnoIndex = indexBotonBorrar;
 
-            const alumnoActual = alumnos[indexBotonBorrar];
-
-            if (indexBotonBorrar >=0 && indexBotonBorrar < alumnos.length) {
-
-                alumnos.splice (indexBotonBorrar, 1);
-
-                localStorage.setItem("AlumnoStorage", JSON.stringify(alumnos));
-
-                construirListaAlumnos();
-
-                Swal.fire(
-                    'Eliminación exitosa',
-                    'El alumno ha sido eliminado de la lista',
-                    'success'
-                );
-            }
             Swal.fire({
                 title: '¿Estas seguro de eliminar este alumno?',
                 text: "no serás capaz de revertir los hechos.",
@@ -199,30 +185,27 @@ const construirListaAlumnos = () => {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'Cancelar'
               }).then((result) => {
                 
-                if (result.isConfirmed && indexBotonBorrar >=0 && indexBotonBorrar < alumnos.length) {
+                if (result.isConfirmed) {
 
-                    alumnos.splice (indexBotonBorrar, 1);
+                    if (indexBotonBorrar >=0 && indexBotonBorrar < alumnos.length){
+                        alumnos.splice (indexBotonBorrar, 1);
 
-                    localStorage.setItem("AlumnoStorage", JSON.stringify(alumnos));
+                        localStorage.setItem("AlumnoStorage", JSON.stringify(alumnos));
 
-                    construirListaAlumnos();
+                        construirListaAlumnos();
 
-                    Swal.fire(
-                        'Eliminación exitosa',
-                        'El alumno ha sido eliminado de la lista',
-                        'success'
-                    );
-
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                        Swal.fire(
+                            'Eliminación exitosa',
+                            'El alumno ha sido eliminado de la lista',
+                            'success'
+                        );
+                    }
                 }
-              })
+            })
         }
     })
 }
