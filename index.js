@@ -296,6 +296,8 @@ const construirListaProfesores = () => {
             inputsProfesores.dni.value = profesorActual.dni;
             inputsProfesores.materia.value = profesorActual.materia;
 
+            inputsProfesores.materia.classList.replace ("btn-primary", "btn-success");
+
         }
     })
 
@@ -414,7 +416,7 @@ buttons.irIngresarProfesor.onclick = () => {
     inputsProfesores.apellido.value = "";
     inputsProfesores.edad.value = "";
     inputsProfesores.dni.value = "";
-    inputsProfesores.materia.value = "";
+    inputsProfesores.materia.value = "Seleccionar";
     
     navegar ("profesores", "agregarProfesor");
 
@@ -423,6 +425,43 @@ buttons.irIngresarProfesor.onclick = () => {
 
     buttons.volverDeActualizarProfesor.parentNode.classList.replace ("d-block", "d-none");
     buttons.volverDeIngresoProfesor.parentNode.classList.replace ("d-none", "d-block");
+}
+
+inputsProfesores.materia.onclick = () => {
+
+    const URLJSON = 'https://api.jsonbin.io/v3/b/6520aea712a5d37659885485';
+    fetch (URLJSON)
+        .then ((resultado) => resultado.json())
+        .then ((data) => {
+            const materias = data.record;
+            localStorage.setItem("materias", materias.Materias);
+            Swal.fire({
+                title: 'Materias',
+                input: 'select',
+                inputOptions: materias,
+                inputPlaceholder: 'Selecciona una materia',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                  return new Promise((resolve) => {
+                    if (value){
+                      resolve()
+                    } else {
+                      resolve('Debes seleccionar una materia')
+                    }
+                  })
+                }
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  const selectedMateria = result.value;
+                  inputsProfesores.materia.value = materias.Materias[selectedMateria];
+                  inputsProfesores.materia.classList.replace("btn-primary", "btn-success");
+                }
+            });
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });     
+
 }
 
 buttons.volverDeActualizarProfesor.onclick = () => {
@@ -448,7 +487,7 @@ buttons.validarAlumno.onclick = () => {
     let valorInputEdad = parseInt(inputsAlumnos.edad.value);
     let valorInputDni = parseInt(inputsAlumnos.dni.value);
 
-    const alumnoExiste = alumnos.some (alumno => alumno.dni === valorInputDni);
+    const alumnoExiste = alumnos.some(alumno => alumno.dni === valorInputDni);
 
     if (alumnoExiste) {
 
@@ -462,7 +501,7 @@ buttons.validarAlumno.onclick = () => {
 
         alumnos.push(new Alumno (valorInputNombre, valorInputApellido, valorInputEdad, valorInputDni));
 
-        localStorage.setItem ("AlumnoStorage", JSON.stringify(alumnos));
+        localStorage.setItem("AlumnoStorage", JSON.stringify(alumnos));
         
         inputsAlumnos.nombre.value = "";
         inputsAlumnos.apellido.value = "";
@@ -513,13 +552,7 @@ buttons.actualizarAlumno.onclick = () => {
         alumnoActual.edad = valorInputEdad;
         alumnoActual.dni = valorInputDni;
 
-        localStorage.setItem ("AlumnoStorage", JSON.stringify(alumnos));
-        
-        inputsAlumnos.nombre.value = "";
-        inputsAlumnos.apellido.value = "";
-        inputsAlumnos.edad.value = "";
-        inputsAlumnos.dni.value = "";
-
+        localStorage.setItem("AlumnoStorage", JSON.stringify(alumnos));
         
         Swal.fire(
             'Actualización exitosa',
@@ -543,11 +576,11 @@ buttons.validarProfesor.onclick = () => {
 
     let valorInputNombreTeacher = inputsProfesores.nombre.value.trim();
     let valorInputApellidoTeacher = inputsProfesores.apellido.value.trim();
-    let valorInputEdadTeacher = parseInt (inputsProfesores.edad.value);
-    let valorInputDniTeacher = parseInt (inputsProfesores.dni.value);
+    let valorInputEdadTeacher = parseInt(inputsProfesores.edad.value);
+    let valorInputDniTeacher = parseInt(inputsProfesores.dni.value);
     let valorInputMateria = inputsProfesores.materia.value.trim();
 
-    const profesorExiste = profesores.some (profesor => profesor.dni === valorInputDniTeacher);
+    const profesorExiste = profesores.some(profesor => profesor.dni === valorInputDniTeacher);
 
     if (profesorExiste) {
 
@@ -559,15 +592,17 @@ buttons.validarProfesor.onclick = () => {
 
     } else if (esValidoNombres(valorInputNombreTeacher, valorInputApellidoTeacher) && edadEsvalido(valorInputEdadTeacher, 22, 64) && dniEsValido(valorInputDniTeacher) && materiaEsValido(valorInputMateria)){
         
-        profesores.push (new Profesor (valorInputNombreTeacher, valorInputApellidoTeacher, valorInputEdadTeacher, valorInputDniTeacher, valorInputMateria));
+        profesores.push(new Profesor (valorInputNombreTeacher, valorInputApellidoTeacher, valorInputEdadTeacher, valorInputDniTeacher, valorInputMateria));
 
-        localStorage.setItem ("ProfesorStorage", JSON.stringify(profesores));
+        localStorage.setItem("ProfesorStorage", JSON.stringify(profesores));
 
         inputsProfesores.nombre.value = "";
         inputsProfesores.apellido.value = "";
         inputsProfesores.edad.value = "";
         inputsProfesores.dni.value = "";
-        inputsProfesores.materia.value = "";
+        inputsProfesores.materia.value = "Seleccionar";
+
+        inputsProfesores.materia.classList.replace("btn-success", "btn-primary");
 
         Swal.fire(
             'Ingreso exitoso',
@@ -613,12 +648,6 @@ buttons.actualizarProfesor.onclick = () => {
         profesorActual.materia = valorInputMateria;
 
         localStorage.setItem("ProfesorStorage", JSON.stringify(profesores));
-
-        inputsProfesores.nombre.value = "";
-        inputsProfesores.apellido.value = "";
-        inputsProfesores.edad.value = "";
-        inputsProfesores.dni.value = "";
-        inputsProfesores.materia.value = "";
 
         Swal.fire(
             'Actualizacion exitosa',
